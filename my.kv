@@ -1,0 +1,206 @@
+#:kivy 1.0
+#:import Snackbar kivymd.uix.snackbar.Snackbar
+
+Screen:
+
+    name: "main"
+    spotify_search_field: spotify_search_field
+    insta_account_field: insta_account_field
+    spotify_error: spotify_error
+    error: error
+    spotify_error_icon: spotify_error_icon
+    error_icon: error_icon
+    spotify_artist_pic: spotify_artist_pic
+    spotify_album_pic: spotify_album_pic
+    profile_pic: profile_pic
+    artist_name: artist_name
+    album_name: album_name
+    download_manager: download_manager
+    spotify_toolbar: spotify_toolbar
+    insta_username: insta_username
+    insta_real_name: insta_real_name
+    followers: followers
+    followed_accounts: followed_accounts
+    private_account: private_account
+    insta_download_button: insta_download_button
+
+    MDBottomNavigation:
+
+        MDBottomNavigationItem:
+            name: "screen_1"
+            text: "Spotify"
+            icon: "spotify"
+            on_tab_release: app.spotify_pics_clean(), app.profile_pic_clean(), app.spotify_error(), app.profile_error()
+
+            MDToolbar:
+                id: spotify_toolbar
+                title: "Spotify Utilities"
+                pos_hint: {"x": 0, "top": 1}
+                size_hint: 1, 0.1
+                right_action_items: [["theme-light-dark", lambda x: app.theme_callback()]]
+
+            MDTextField:
+                id: spotify_search_field
+                hint_text: "Cerca un brano, album o artista"
+                mode: "rectangle"
+                pos_hint: {"x": 0.2, "top": 0.6}
+                size_hint: 0.6, 0.1
+                halign: "center"
+                on_focus: app.change_spotify_search_field_pos(), app.spotify_pics_clean()
+                on_text_validate: app.get_spotify_text(), app.get_spotify_pics()
+
+            MDLabel:
+                id: spotify_error
+                text: ""
+                halign: "center"
+                pos_hint: {"top": 0.65}
+
+            MDIcon:
+                id: spotify_error_icon
+                icon: ""
+                font_size: "250"
+                halign: "center"
+                pos_hint: {"top": 0.95}
+
+            AsyncImage:
+                id: spotify_artist_pic
+                pos_hint: {"x": 100}
+                halign: "center"
+                size_hint: 0.5, 0.5
+                
+            MDLabel:
+                id: artist_name
+                text: ""
+                halign: "center"
+                pos_hint: {"top": 1.15}
+                theme_text_color: "Custom"
+                text_color: 0.95686274509803921568627450980392, 0.26274509803921568627450980392157, 0.21176470588235294117647058823529, 1  # Dividere il colore RGBA per 255
+
+            AsyncImage:
+                id: spotify_album_pic
+                pos_hint: {"x": 100}
+                halign: "center"
+                size_hint: 0.5, 0.5
+
+            MDLabel:
+                id: album_name
+                text: ""
+                halign: "center"
+                pos_hint: {"top": 0.82}
+                theme_text_color: "Custom"
+                text_color: 0.95686274509803921568627450980392, 0.26274509803921568627450980392157, 0.21176470588235294117647058823529, 1
+
+            MDFloatingActionButton:
+                id: download_manager
+                icon: "archive-arrow-down"
+                md_bg_color: app.theme_cls.primary_color
+                elevation: 10
+                pos_hint: {"x": 100, "top": 0.12}
+                on_release: app.download_menu_open()
+
+        MDBottomNavigationItem:
+            id: screen2
+            name: "screen_2"
+            text: "Instagram"
+            icon: "instagram"
+            on_tab_release: app.spotify_pics_clean(), app.profile_pic_clean(), app.spotify_error(), app.profile_error()
+
+            MDToolbar:
+                title: "Instagram Utilities"
+                pos_hint: {"x": 0, "top": 1}
+                size_hint: 1, 0.1
+                right_action_items: [["theme-light-dark", lambda x: app.theme_callback()]]  # theme-light-dark   
+
+            MDTextField:
+                id: insta_account_field
+                hint_text: "Cerca un profilo instagram"
+                mode: "rectangle"
+                pos_hint: {"x": 0.2, "top": 0.6}
+                size_hint: 0.6, 0.1
+                halign: "center"
+                on_focus: app.change_insta_account_pos(), app.profile_pic_clean()
+                on_text_validate: app.get_insta_username(), app.get_insta_profile_pic()
+
+            AsyncImage:
+                id: profile_pic
+                pos_hint: {"x": 100, "top": 0.82}
+                size_hint: 0.5, 0.5
+
+            MDLabel:
+                id: insta_username
+                text: ""
+                halign: "center"
+                pos_hint: {"top": 1.17}
+                theme_text_color: "Custom"
+                text_color: 0.95686274509803921568627450980392, 0.26274509803921568627450980392157, 0.21176470588235294117647058823529, 1
+
+            MDLabel:
+                id: insta_real_name
+                text: ""
+                halign: "center"
+                pos_hint: {"top": 0.78}
+                theme_text_color: "Custom"
+                text_color: 0.95686274509803921568627450980392, 0.26274509803921568627450980392157, 0.21176470588235294117647058823529, 1
+
+            MDLabel:
+                id: followers
+                text: ""
+                halign: "center"
+                pos_hint: {"top": 0.725}
+                theme_text_color: "Custom"
+                text_color: 0.95686274509803921568627450980392, 0.26274509803921568627450980392157, 0.21176470588235294117647058823529, 1
+
+            MDLabel:
+                id: followed_accounts
+                text: ""
+                halign: "center"
+                pos_hint: {"top": 0.67}
+                theme_text_color: "Custom"
+                text_color: 0.95686274509803921568627450980392, 0.26274509803921568627450980392157, 0.21176470588235294117647058823529, 1
+
+            MDLabel:
+                id: private_account
+                text: ""
+                halign: "center"
+                pos_hint: {"top": 0.615}
+                theme_text_color: "Custom"
+                text_color: 0.95686274509803921568627450980392, 0.26274509803921568627450980392157, 0.21176470588235294117647058823529, 1
+
+            MDIcon:
+                id: error_icon
+                icon: ""
+                font_size: "250"
+                halign: "center"
+                pos_hint: {"top": 0.95}
+
+            MDLabel:
+                id: error
+                text: ""
+                halign: "center"
+                pos_hint: {"top": 0.65}
+
+            MDFloatingActionButton:
+                id: insta_download_button
+                icon: "archive-arrow-down"
+                md_bg_color: app.theme_cls.primary_color
+                elevation: 10
+                pos_hint: {"x": 100, "top": 0.12}
+                on_release: app.download_insta_menu_open()
+
+        MDBottomNavigationItem:
+            name: "screen_3"
+            text: "Facebook"
+            icon: "facebook"
+            on_tab_release: app.show_alert(), app.spotify_pics_clean(), app.profile_pic_clean(), app.spotify_error(), app.profile_error() # Capire perchè non si allinea al centro e viene tagliato ai margini se visualizzato in modalità smartphone
+
+            MDToolbar:
+                title: "Facebook Utilities"
+                pos_hint: {"x": 0, "top": 1}
+                size_hint: 1, 0.1
+                right_action_items: [["theme-light-dark", lambda x: app.theme_callback()]]
+                
+            MDIcon:
+                icon: "progress-wrench"
+                font_size: "500"
+                pos_hint: {"top": 0.95}
+                halign: "center"
