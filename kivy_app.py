@@ -18,9 +18,6 @@ import urllib.request
 import deezer
 import os
 
-# IMPORTANTE -> Capire in che directory salvare le immagini su Android
-# IMPORTANTE -> Testare l'App su Android utilizzando buildozer
-
 class MyApp(MDApp):
 
     src_manager = ObjectProperty(None)
